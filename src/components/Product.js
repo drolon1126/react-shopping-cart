@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Product = props => {
+	const uId = () => Date.now() + Math.floor(Math.random()*100);
 	return (
 		<div className="product">
 			<img src={props.product.image} alt={`${props.product.title} book`} />
@@ -9,7 +10,11 @@ const Product = props => {
 
 			<p className="price">${props.product.price}</p>
 
-			<button onClick={() => props.addItem(props.product)}>
+			<button onClick={() => {
+				let tmp = {...props.product};
+				tmp.id = uId();
+				props.addItem(tmp);
+			}}>
 				Add to cart
 			</button>
 		</div>
